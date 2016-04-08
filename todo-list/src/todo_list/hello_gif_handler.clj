@@ -8,8 +8,8 @@
  	{ :status 200
 	  :headers {"Content-Type" "text/html"}
 	  :body (str "<html><body><h1>Hello<h1>\n"
+				"<img src=\"const_e0.gif\"/><br>"
 				"<img src=\"daniel.jpg\"/>"
-				"<img src=\"http://www.anon.com/pic2.jpg\"/>\n"
 				"</body></html>")})
 
 ;; needs a content type
