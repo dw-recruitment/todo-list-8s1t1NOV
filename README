@@ -1,0 +1,34 @@
+
+https://gist.github.com/cap10morgan/d98c260159bc386b5d56
+
+For this project, you should implement as much of the following as you can in one week:
+
+    Start a new Clojure project using the leiningen build tool.
+    Pull in an HTTP library (ring is a common choice) and add a / HTTP endpoint that serves a headline and a nice "under construction" animated GIF. We love animated GIFs.
+    Add an /about HTTP endpoint that gives a brief description of the project.
+    Use a database of your choice to store TODO items (don't try to support multiple TODO lists yet).
+        For the choice of database, SQLite and PostgreSQL are 2 common options. We use Datomic and welcome submissions using that, but it has a steep learning curve if you are new to it.
+        Each TODO item should keep track of its text and its doneness state (for now either :todo or :done).
+    Make the TODO items stored in the database show up on the / page in place of the "under construction" GIF you started with.
+        Use the Hiccup library to render the HTML.
+        Add some dummy data to the database with at least 2 items in each doneness state.
+        Do not worry about making the items editable (even to mark them as :done) yet. We'll tackle that next.
+    Add a form to the / page for adding new TODO items to the list.
+        The form should accept the text of the item, and when submitted, put it at the bottom of the list in :todo state.
+    Add a button next to each TODO item to "complete" it (mark it as :done).
+        Change the button to "undo" marking it as complete when clicked and make it put that item back to :todo if clicked.
+        Make an item in :done state have its text struckthrough like this.
+    Add a button next to each TODO item to delete it.
+    Modify the app to support multiple TODO lists (each with a name and their own set of TODO items).
+    From here you should get creative. Some ideas:
+        Make it update in realtime across different browsers showing the same TODO lists.
+        Add user account support with data segration across accounts (i.e. when logged in I should only see my TODO lists).
+        Replace the server-rendered UI with a ClojureScript-based client-side UI (use your favorite React wrapper library; Om, Om.next, Reagent, etc.).
+
+You should:
+
+    Use git for version control (we'll want the entire git repo submitted).
+    Make a commit that runs for each step above so we can see your progress as you built the project.
+        Name these commits "Complete step 1", "Complete step 2", etc. so we can tell which they are.
+        Feel free to commit as often as you like besides that.
+
