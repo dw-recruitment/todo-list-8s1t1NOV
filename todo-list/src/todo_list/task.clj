@@ -1,6 +1,5 @@
 (ns todo-list.task
-	(:require [clojure.java.jdbc :as sql])
-)
+	(:require [clojure.java.jdbc :as jdbc]))
 
 ;;
 ;; TODO
@@ -18,24 +17,32 @@
 
 
 (defn drop-task-table []
-	(sql/db-do-commands db 
-		(sql/drop-table-ddl :task)))
+	(jdbc/db-do-commands db 
+		(jdbc/drop-table-ddl :task)))
 
 (defn create-task-table []
-	(sql/db-do-commands db
-		(sql/create-table-ddl :task
+	(jdbc/db-do-commands db
+		(jdbc/create-table-ddl :task
 			[:id :serial  "PRIMARY KEY"]
 			[:name "VARCHAR(20)"]
 			[:complete :boolean])))
 
 (defn insert-starter-data []
-	(sql/insert! db 
-		:task {:name "dishes" :complete false})	
-	(sql/insert! db 
-		:task {:name "cat poop" :complete true}) 
-	(sql/insert! db
-		:task {:name "homework" :complete false}) )
+	(jdbc/insert! db 
+		:task {:name "dishes" :complete false })	
+	(jdbc/insert! db 
+		:task {:name "cat poop" :complete true }) 
+	(jdbc/insert! db
+		:task {:name "homework" :complete false }) )
+
+(defn do-over [] 
+	(drop-task-table)
+	(create-task-table)
+	(insert-starter-data) )
 
 (defn get-task-list []
-	(sql/query db ["SELECT name, complete from task"]))
+	(jdbc/query db ["SELECT name, complete, id from task"]))
 
+(defn mark-complete [id] 
+	(jdbc/update! db :task {:complete true} ["id = ?" id ] ))
+							
