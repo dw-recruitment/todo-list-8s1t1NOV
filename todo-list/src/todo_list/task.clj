@@ -7,6 +7,8 @@
 ;; hang on to a connection, reuse
 ;; but really, use korma or something
 ;; consider a text value for state, allowing others, e.g. "in-progress" 
+;; consider a "deleted" state in it's own column to preserve history..
+;; consider a rule that says you can't delete unless its done (...a where clause on the delete...)
 
 (def dbname "democracy_works")
 (def db {:classname "org.postgresql.Driver"
@@ -42,12 +44,17 @@
 	(insert-starter-data) )
 
 (defn get-task-list []
-	(jdbc/query db ["SELECT name, complete, id from task"]))
+	(jdbc/query db ["SELECT name, complete, id from task order by id"]))
 
 (defn mark-complete [id] 
 	(jdbc/update! db :task {:complete true} ["id = ?" id ] ))
 
+(defn mark-todo [id] 
+	(jdbc/update! db :task {:complete false} ["id = ?" id ] ))
+
 (defn create-new-task [name]
 	(jdbc/insert! db
 		:task {:name name :complete false }) )
-							
+						
+(defn delete-task [id] 
+	(jdbc/delete! db :task ["id = ?" id]))
