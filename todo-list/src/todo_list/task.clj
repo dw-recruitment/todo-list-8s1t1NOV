@@ -6,6 +6,7 @@
 ;; corral the connection attribute
 ;; hang on to a connection, reuse
 ;; but really, use korma or something
+;; consider a text value for state, allowing others, e.g. "in-progress" 
 
 (def dbname "democracy_works")
 (def db {:classname "org.postgresql.Driver"
@@ -45,4 +46,8 @@
 
 (defn mark-complete [id] 
 	(jdbc/update! db :task {:complete true} ["id = ?" id ] ))
+
+(defn create-new-task [name]
+	(jdbc/insert! db
+		:task {:name name :complete false }) )
 							

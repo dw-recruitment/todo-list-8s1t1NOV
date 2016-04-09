@@ -11,6 +11,7 @@
 (defroutes app-routes
   (GET "/" [] task/handler)
   (POST "/mark-complete-form" [] task/handler)
+  (POST "/new-task-form" [] task/handler)
   (GET "/hello" [] gif/handler)
   (GET "/about" [] (resp/resource-response "about.html" {:root "public"}))
   (route/resources "/")
