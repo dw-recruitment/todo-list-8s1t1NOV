@@ -9,10 +9,10 @@
 
 (defn render-task [task]
 	(html [:li 
-			(str (:name task) " ") 
 			(if (:complete task)
-				"completed"
-				(submit-button {:name "complete" :value (:id task) } "complete" )) ]))
+				(str "<del>" (:name task) "</del>" ) 
+				(str (:name task) " " 
+					(html (submit-button {:name "complete" :value (:id task) } "complete")) ))]))
 
 (defn render-task-list [tasks] 
 	(form-to [:post "/mark-complete-form"]
