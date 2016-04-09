@@ -7,9 +7,8 @@
 (defn handler [request-map]
  	{ :status 200
 	  :headers {"Content-Type" "text/html"}
-	  :body (str "<html><body><h1>Hello<h1>\n"
-				"<img src=\"const_e0.gif\"/><br>"
-				"<img src=\"daniel.jpg\"/>"
+	  :body (str "<html><body>\n"
+				"<img src=\"images/const_e0.gif\"/><br>"
 				"</body></html>")})
 
 ;; needs a content type
