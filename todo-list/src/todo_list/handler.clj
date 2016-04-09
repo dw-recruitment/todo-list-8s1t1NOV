@@ -3,7 +3,7 @@
             [compojure.route :as route]
             [compojure.handler]
 			[ring.util.response :as resp])
-  (use todo-list.hello-gif-handler))
+  (:use [todo-list.hello-gif-handler :only [handler]]))
 
 
 (defroutes app-routes
@@ -13,6 +13,5 @@
   (route/not-found "Not Found"))
 
 (def app
-	(compojure.core/routes
-		app-routes))
+	(compojure.core/routes app-routes))
 
