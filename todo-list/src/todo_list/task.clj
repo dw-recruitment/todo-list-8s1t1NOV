@@ -1,5 +1,6 @@
 (ns todo-list.task
-	(:require [clojure.java.jdbc :as jdbc]))
+	(:require [clojure.java.jdbc :as jdbc])
+	(:require [todo-list.list :as list]))
 
 ;;
 ;; TODO
@@ -28,33 +29,40 @@
 		(jdbc/create-table-ddl :task
 			[:id :serial  "PRIMARY KEY"]
 			[:name "VARCHAR(20)"]
-			[:complete :boolean])))
+			[:complete :boolean]
+			[:list_id "INTEGER"])))
 
 (defn insert-starter-data []
 	(jdbc/insert! db 
-		:task {:name "dishes" :complete false })	
+		:list {:name "starter" :id 1 })	
 	(jdbc/insert! db 
-		:task {:name "cat poop" :complete true }) 
+		:task {:name "dishes" :complete false :list_id 1 })	
+	(jdbc/insert! db 
+		:task {:name "cat box" :complete true :list_id 1}) 
 	(jdbc/insert! db
-		:task {:name "homework" :complete false }) )
+		:task {:name "homework" :complete false :list_id 1}) 
+	(jdbc/insert! db
+		:task {:name "taxes" :complete false :list_id 1}) )
 
 (defn do-over [] 
 	(drop-task-table)
+	(list/drop-list-table)
 	(create-task-table)
+	(list/create-list-table)
 	(insert-starter-data) )
 
-(defn get-task-list []
-	(jdbc/query db ["SELECT name, complete, id from task order by id"]))
+(defn get-task-list [list-id]
+	(jdbc/query db ["SELECT name, complete, id from task where list_id = ? order by id" list-id]))
 
-(defn mark-complete [id] 
-	(jdbc/update! db :task {:complete true} ["id = ?" id ] ))
+(defn mark-complete [id list_id] 
+	(jdbc/update! db :task {:complete true} ["id = ? and list_id  = ?" id list_id ] ))
 
-(defn mark-todo [id] 
-	(jdbc/update! db :task {:complete false} ["id = ?" id ] ))
+(defn mark-todo [id list_id] 
+	(jdbc/update! db :task {:complete false} ["id = ? and list_id = ?" id list_id] ))
 
-(defn create-new-task [name]
+(defn create-new-task [name list_id]
 	(jdbc/insert! db
-		:task {:name name :complete false }) )
+		:task {:name name :complete false :list_id list_id}) )
 						
-(defn delete-task [id] 
-	(jdbc/delete! db :task ["id = ?" id]))
+(defn delete-task [id list_id] 
+	(jdbc/delete! db :task ["id = ? and list_id = ? " id list_id]))
