@@ -27,7 +27,7 @@
 (println "GETTING LIST NAME BY  id" id)
 	(:name  (first (jdbc/query db ["SELECT name from list where id = ?" id]))))
 
+; returns id of new list
 (defn create-new-list [name]
-	(jdbc/insert! db
-		:list {:name name }) )
+	(:id (first (jdbc/insert! db :list {:name name }))) )
 						
