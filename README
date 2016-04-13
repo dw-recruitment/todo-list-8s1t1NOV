@@ -4,22 +4,41 @@ https://gist.github.com/cap10morgan/d98c260159bc386b5d56
 For this project, you should implement as much of the following as you can in one week:
 
     Start a new Clojure project using the leiningen build tool.
-    Pull in an HTTP library (ring is a common choice) and add a / HTTP endpoint that serves a headline and a nice "under construction" animated GIF. We love animated GIFs.
-    Add an /about HTTP endpoint that gives a brief description of the project.
-    Use a database of your choice to store TODO items (don't try to support multiple TODO lists yet).
+    0. Pull in an HTTP library (ring is a common choice) and add a / HTTP endpoint that serves a headline and a nice "under construction" animated GIF. We love animated GIFs.
+	09e7d6018fb5703691b581a1d318c688fd287cb5
+
+    1. Add an /about HTTP endpoint that gives a brief description of the project.
+    f63937dcda3d0879bcb5d5e652caa20eee7c7ff1
+
+    2. Use a database of your choice to store TODO items (don't try to support multiple TODO lists yet).
         For the choice of database, SQLite and PostgreSQL are 2 common options. We use Datomic and welcome submissions using that, but it has a steep learning curve if you are new to it.
         Each TODO item should keep track of its text and its doneness state (for now either :todo or :done).
-    Make the TODO items stored in the database show up on the / page in place of the "under construction" GIF you started with.
+	b748c546d745901907077e5791236573bdd0d2ea
+
+    3. Make the TODO items stored in the database show up on the / page in place of the "under construction" GIF you started with.
+    96d54bda3a4712227b5da86f546fc43aa6557358
+
         Use the Hiccup library to render the HTML.
         Add some dummy data to the database with at least 2 items in each doneness state.
         Do not worry about making the items editable (even to mark them as :done) yet. We'll tackle that next.
-    Add a form to the / page for adding new TODO items to the list.
+
+    4. Add a form to the / page for adding new TODO items to the list.
         The form should accept the text of the item, and when submitted, put it at the bottom of the list in :todo state.
-    Add a button next to each TODO item to "complete" it (mark it as :done).
+	5a89b5adafc0bcbdd27981491b2a695f5c9202af
+
+    5. Add a button next to each TODO item to "complete" it (mark it as :done).
         Change the button to "undo" marking it as complete when clicked and make it put that item back to :todo if clicked.
         Make an item in :done state have its text struckthrough like this.
-    Add a button next to each TODO item to delete it.
-    Modify the app to support multiple TODO lists (each with a name and their own set of TODO items).
+	88799e93ff993e3795ac6c10bda8585b8f76de7f
+
+    6. Add a button next to each TODO item to delete it.
+	aa2f694623cb1111ec8fd13dc2309333a202e91c 
+
+    7. Modify the app to support multiple TODO lists (each with a name and their own set of TODO items).
+	6eddca0f3cd2c565e8422b90078a45206b966a19
+
+
+
     From here you should get creative. Some ideas:
         Make it update in realtime across different browsers showing the same TODO lists.
         Add user account support with data segration across accounts (i.e. when logged in I should only see my TODO lists).
