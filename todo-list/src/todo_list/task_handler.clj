@@ -36,7 +36,6 @@
 			(submit-button {:name "new-task"} "Create New Task" )) ))
 
 (defn render-page [list-number]
-(println "RENDERING list number " list-number)
 	(response/header 
 		(response/response
 			(html 
@@ -52,11 +51,11 @@
 						(list-handler/render-new-list-form list-number) ]))
 		"Content-Type" "text/html")) 
 
-; returns list to render, usually just a pass-through, but create-new-list
-(defn do-params [params]
+(defn do-params 
+"returns list to render, usually just a pass-through, but create-new-list"
+[params]
 	(let [inverted-params (set/map-invert params)
 		  list-number (Integer/parseInt (or (params "show-list")  "1"))]
-(println "CAPTURED " list-number)
 		(if (inverted-params "delete")
 			(task/delete-task (Integer/parseInt (inverted-params "delete")) list-number))	
 		(if (inverted-params "todo")
@@ -66,11 +65,8 @@
 		(if (params "new-task")
 			(task/create-new-task (params "task-name") list-number))
 		(cond 
-			(params "new-list") (let [new-list-id (list/create-new-list (params "list-name"))]
-				(println "created new list with id;" new-list-id)
-				new-list-id) 
-		    :else list-number)
-))
+			(params "new-list") (list/create-new-list (params "list-name"))
+		    :else list-number)))
 
 
 (defn handler [request-map]

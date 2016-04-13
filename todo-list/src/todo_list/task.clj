@@ -4,9 +4,7 @@
 
 ;;
 ;; TODO
-;; corral the connection attribute
-;; hang on to a connection, reuse
-;; but really, use korma or something
+;; consider  korma or other ORM
 ;; consider a text value for state, allowing others, e.g. "in-progress" 
 ;; consider a "deleted" state in it's own column to preserve history..
 ;; consider a rule that says you can't delete unless its done (...a where clause on the delete...)

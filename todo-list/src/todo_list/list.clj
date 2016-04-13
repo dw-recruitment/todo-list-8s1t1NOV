@@ -24,10 +24,10 @@
 	(jdbc/query db ["SELECT name, id from list order by id"]))
 
 (defn get-list-name [id]
-(println "GETTING LIST NAME BY  id" id)
 	(:name  (first (jdbc/query db ["SELECT name from list where id = ?" id]))))
 
-; returns id of new list
-(defn create-new-list [name]
+(defn create-new-list 
+"returns id of new list"
+[name]
 	(:id (first (jdbc/insert! db :list {:name name }))) )
 						

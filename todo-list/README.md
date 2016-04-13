@@ -15,7 +15,14 @@ You will need [Leiningen][] 2.0.0 or above installed.
 To start a web server for the application, run:
 
     lein ring server
+## TODO
+
+- Improve file structure to separate render functions from data manipulations.
+
+- Go full-on REST with a JS framework, possibly Om.
+
+- Dockerize the db setup
 
 ## License
 
-Copyright © 2016 FIXME
+Copyright © 2016  Anonymous Candidate
