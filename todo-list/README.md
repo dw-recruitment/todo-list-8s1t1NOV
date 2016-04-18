@@ -1,6 +1,6 @@
 # todo-list
 
-"todo list", a coding interview by Anonymous Candidate for Democracy Works. April 2016
+"todo list", a coding interview by Anonymous Candidate for Democracy Works.
 
 This is old-school, server-rendered HTML, with simple JDBC hitting a postgres database set-up outside the scope of this code. No react, no REST or micro-services, no Angular, no Docker for the db...
 
@@ -25,4 +25,4 @@ To start a web server for the application, run:
 
 ## License
 
-Copyright © 2016  Anonymous Candidate
+Copyright © 2016 Anonymous Candidate
